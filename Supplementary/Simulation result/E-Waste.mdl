@@ -1,0 +1,512 @@
+{UTF-8}
+"Base E-waste"=3.3
+	~	Mt/yr
+	~		|
+
+Base formal collection fraction=0.05
+	~	1/yr
+	~		|
+
+Base informal collection fraction=0.4
+	~	1/yr
+	~		|
+
+Carbon Avoidance Rate=Material Recovery Rate* Carbon saving pertonne * Recovery Quality Factor\
+		 + MAX(0, (Lifecycle extension through reuse and repair- 0.5) * 2) * "E-waste Inflow"\
+		 * Lifecycle carbon saving
+	~	
+	~		|
+
+Carbon Avoided Cumulative= INTEG (Carbon Avoidance Rate,
+		0)
+	~	
+	~		|
+
+Carbon Emission Cumulative= INTEG (Carbon Emission Rate,
+		0)
+	~	
+	~		|
+
+Carbon Emission Rate=Collection Outflow* Emission factor informal base* (1 - 0.7 * Technological upgrading capability\
+		)
+	~	
+	~		|
+
+Carbon saving pertonne=4.5
+	~	tCO2/t
+	~		|
+
+Pollution control and environmental practices Level=MIN(1, Regulatory Enforcement strength Level\
+		* 0.4 + Technological upgrading capability* 0.6)
+	~	
+	~		|
+
+Collection Outflow="E-Waste Stock" * (Base informal collection fraction* Collection and reverse logistics efficiency\
+		+ Base formal collection fraction* Regulatory Enforcement strength Level* Technological upgrading capability\
+		) + "E-Waste Stock" * Informal–formal sector integration* 0.02
+	~	
+	~		|
+
+Data transparency and traceability Level=MIN(1, Stakeholder Collab Level* 0.55 + Collection and reverse logistics efficiency\
+		* 0.45)
+	~	
+	~		|
+
+"E-waste growth rate"=0.04
+	~	1/yr
+	~		|
+
+"E-waste Inflow"="Base E-waste" * EXP("E-waste growth rate" * Time) * MAX(0, 1 - Lifecycle extension through reuse and repair\
+		* 0.15)
+	~	
+	~		|
+
+"E-Waste Stock"= INTEG ("E-waste Inflow"-Collection Outflow,
+		5.5)
+	~	
+	~		|
+
+Recovery Quality Factor=MIN(1, 0.3 + 0.5 * Technological upgrading capability+ 0.2 * \
+		Collection and reverse logistics efficiency)
+	~	
+	~		|
+
+Emission factor informal base=3.5
+	~	tCO2/t
+	~		|
+
+Lifecycle carbon saving=0.8
+	~	tCO2/t
+	~		|
+
+Social inclusion of informal workers LEvel=MIN(1, Stakeholder Collab Level* 0.45 + Economic incentives and financial support\
+		* 0.4 + Informal–formal sector integration* 0.15)
+	~	
+	~		|
+
+Occupational health and safety conditions Level=MIN(1, Regulatory Enforcement strength Level\
+		* 0.5 + Technological upgrading capability* 0.5)
+	~	
+	~		|
+
+Net Carbon Balance=Carbon Avoided Cumulative-Carbon Emission Cumulative
+	~	
+	~		|
+
+Lifecycle extension through reuse and repair=MIN(1, Economic incentives and financial support\
+		* 0.55 + Social inclusion of informal workers LEvel* 0.45)
+	~	
+	~		|
+
+Clean Tech Access Level=0.7
+	~	
+	~		|
+
+Economic incentives and financial support= INTEG (Incentive Growth - Incentive Decay,
+		0.3)
+	~	
+	~		|
+
+EPR Implementation=0.35
+	~	
+	~		|
+
+Incentive Decay=Economic incentives and financial support*Incentive Decay Rate
+	~	
+	~		|
+
+Incentive Decay Rate=0.06
+	~	
+	~		|
+
+Incentive Growth=Revenue from Recovery/ 1000 * 0.15 * (1 - Economic incentives and financial support\
+		) + Regulatory Enforcement strength Level* 0.08 * (1 - Economic incentives and financial support\
+		) + Stakeholder Collab Level* 0.07 * (1 - Economic incentives and financial support\
+		) + EPR Implementation* 0.03 * (1 - Economic incentives and financial support)
+	~	
+	~		|
+
+Informal–formal sector integration=0.5
+	~	
+	~		|
+
+Logistic decay=Logistic decay rate*Collection and reverse logistics efficiency
+	~	
+	~		|
+
+Logistic decay rate=0.04
+	~	
+	~		|
+
+Collection and reverse logistics efficiency= INTEG (Logistics Improvement- Logistic decay\
+		,
+		0.45)
+	~	
+	~		|
+
+Logistics Improvement=Technological upgrading capability* 0.1 * (1 - Collection and reverse logistics efficiency\
+		) + Regulatory Enforcement strength Level* 0.08 * (1  - Collection and reverse logistics efficiency\
+		) + Economic incentives and financial support* 0.06 * (1 - Collection and reverse logistics efficiency\
+		) + Informal–formal sector integration* 0.03 * (1 - Collection and reverse logistics efficiency\
+		)
+	~	
+	~		|
+
+Material Recovery Rate=Collection Outflow* (0.5 + 0.3 * Material recovery efficiency+\
+		 0.2 * Technological upgrading capability)
+	~	
+	~		|
+
+Recovery Decay=Recovery Decay Rate*Material recovery efficiency
+	~	
+	~		|
+
+Recovery Decay Rate=0.04
+	~	
+	~		|
+
+Recovery Improvement=Technological upgrading capability* 0.12 * (1 - Material recovery efficiency\
+		) + Collection and reverse logistics efficiency* 0.1 * (1 - Material recovery efficiency\
+		) + Clean Tech Access Level* 0.08 * (1 - Material recovery efficiency)
+	~	
+	~		|
+
+Material recovery efficiency= INTEG (Recovery Improvement - Recovery Decay,
+		0.4)
+	~	
+	~		|
+
+Regulatory Enforcement strength Level=0.75
+	~	
+	~		|
+
+Revenue from Recovery=Material Recovery Rate*Secondary Material Price
+	~	
+	~		|
+
+Secondary Material Price=800
+	~	
+	~		|
+
+Stakeholder Collab Level=0.65
+	~	
+	~		|
+
+Tech adoption rate=Clean Tech Access Level* 0.12 * (1 - Technological upgrading capability\
+		) + Economic incentives and financial support* 0.08 * (1 - Technological upgrading capability\
+		) + Regulatory Enforcement strength Level* 0.05 * (1 - Technological upgrading capability\
+		)
+	~	
+	~		|
+
+Tech depreciation=Tech Depreciation Rate*Technological upgrading capability
+	~	
+	~		|
+
+Tech Depreciation Rate=0.05
+	~	
+	~		|
+
+Technological upgrading capability= INTEG (Tech adoption rate - Tech depreciation,
+		0.25)
+	~	
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 75
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,99,2
+10,1,Technological upgrading capability,-79,43,63,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Collection and reverse logistics efficiency,-164,342,58,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,Material recovery efficiency,593,133,61,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,Economic incentives and financial support,536,467,65,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,5,48,-435,44,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,6,0,-281,44,6,8,2,3,0,0,1,0,0,0,0,0,0,0,0,0
+1,7,6,5,100,0,0,22,0,192,0,-1--1--1,,1|(-356,44)|
+1,8,6,1,4,0,0,22,0,192,0,-1--1--1,,1|(-208,44)|
+10,9,Technological upgrading capability,-677,259,63,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+12,10,48,222,43,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,11,0,95,43,6,8,2,3,0,0,1,0,0,0,0,0,0,0,0,0
+1,12,11,1,100,0,0,22,0,192,0,-1--1--1,,1|(36,43)|
+1,13,11,10,4,0,0,22,0,192,0,-1--1--1,,1|(156,43)|
+10,14,Tech depreciation,110,99,54,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,15,Tech adoption rate,-293,92,56,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,16,15,6,1,0,0,0,0,192,0,-1--1--1,,1|(-281,69)|
+1,17,14,11,1,0,0,0,0,192,0,-1--1--1,,1|(97,59)|
+12,18,48,-377,339,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,19,0,-290,339,6,8,2,3,0,0,1,0,0,0,0,0,0,0,0,0
+1,20,19,18,100,0,0,22,0,192,0,-1--1--1,,1|(-331,339)|
+1,21,19,2,4,0,0,22,0,192,0,-1--1--1,,1|(-253,339)|
+12,22,48,38,342,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,23,0,-44,342,6,8,2,3,0,0,1,0,0,0,0,0,0,0,0,0
+1,24,23,2,100,0,0,22,0,192,0,-1--1--1,,1|(-78,342)|
+1,25,23,22,4,0,0,22,0,192,0,-1--1--1,,1|(-5,342)|
+10,26,Logistics Improvement,-308,408,65,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,27,Logistic decay,-31,407,44,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,28,26,19,1,0,0,0,0,192,0,-1--1--1,,1|(-286,379)|
+1,29,27,23,1,0,0,0,0,192,0,-1--1--1,,1|(-42,374)|
+12,30,48,308,130,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,31,0,425,130,6,8,2,3,0,0,1,0,0,0,0,0,0,0,0,0
+1,32,31,30,100,0,0,22,0,192,0,-1--1--1,,1|(368,130)|
+1,33,31,3,4,0,0,22,0,192,0,-1--1--1,,1|(481,130)|
+12,34,48,920,133,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,35,0,782,133,6,8,2,3,0,0,1,0,0,0,0,0,0,0,0,0
+1,36,35,3,100,0,0,22,0,192,0,-1--1--1,,1|(715,133)|
+1,37,35,34,4,0,0,22,0,192,0,-1--1--1,,1|(849,133)|
+10,38,Recovery Improvement,375,201,66,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,39,Recovery Decay,769,205,49,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,40,38,31,1,0,0,0,0,192,0,-1--1--1,,1|(430,173)|
+1,41,39,35,1,0,0,0,0,192,0,-1--1--1,,1|(804,169)|
+12,42,48,278,469,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,43,0,379,469,6,8,2,3,0,0,1,0,0,0,0,0,0,0,0,0
+1,44,43,42,100,0,0,22,0,192,0,-1--1--1,,1|(330,469)|
+1,45,43,4,4,0,0,22,0,192,0,-1--1--1,,1|(428,469)|
+12,46,48,737,467,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,47,0,664,467,6,8,2,3,0,0,1,0,0,0,0,0,0,0,0,0
+1,48,47,4,100,0,0,22,0,192,0,-1--1--1,,1|(629,467)|
+1,49,47,46,4,0,0,22,0,192,0,-1--1--1,,1|(698,467)|
+10,50,Incentive Growth,337,544,52,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,51,Incentive Decay,657,537,49,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,52,50,43,1,0,0,0,0,192,0,-1--1--1,,1|(362,516)|
+1,53,51,47,1,0,0,0,0,192,0,-1--1--1,,1|(680,498)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Tech
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,2
+10,1,Tech adoption rate,466,284,51,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Clean Tech Access Level,275,206,62,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,Regulatory Enforcement strength Level,692,197,63,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,Technological upgrading capability,629,459,63,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,5,Economic incentives and financial support,337,470,54,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,6,5,1,1,0,0,0,0,192,0,-1--1--1,,1|(322,392)|
+1,7,4,1,1,0,0,0,0,192,0,-1--1--1,,1|(613,361)|
+1,8,2,1,1,0,0,0,0,192,0,-1--1--1,,1|(335,242)|
+1,9,3,1,1,0,0,0,0,192,0,-1--1--1,,1|(589,260)|
+10,10,Tech depreciation,511,600,48,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,11,Tech Depreciation Rate,314,613,60,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,12,4,10,1,0,0,0,0,192,0,-1--1--1,,1|(636,585)|
+1,13,11,10,1,0,0,0,0,192,0,-1--1--1,,1|(451,661)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Logistic
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,2
+10,1,Logistics Improvement,331,225,59,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Technological upgrading capability,441,89,63,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,3,Collection and reverse logistics efficiency,331,410,55,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,4,Regulatory Enforcement strength Level,-15,225,66,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,5,Informal–formal sector integration,664,223,60,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,6,3,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,7,5,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,8,2,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,9,4,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,10,Economic incentives and financial support,156,94,54,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,11,10,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,12,Logistic decay,333,543,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,13,Logistic decay rate,333,677,49,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,14,3,12,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,15,13,12,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Recovery
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,2
+10,1,Recovery Improvement,438,151,61,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Technological upgrading capability,230,256,63,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,3,Collection and reverse logistics efficiency,430,-68,55,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,4,Clean Tech Access Level,647,267,52,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,5,Material recovery efficiency,442,391,42,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,6,5,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,7,2,1,1,0,0,0,0,192,0,-1--1--1,,1|(308,168)|
+1,8,4,1,1,0,0,0,0,192,0,-1--1--1,,1|(592,187)|
+1,9,3,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,10,Recovery Decay Rate,444,617,55,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,11,Recovery Decay,443,503,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,12,10,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,13,5,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Incentive
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,2
+10,1,Revenue from Recovery,213,380,62,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Economic incentives and financial support,452,210,54,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,3,Regulatory Enforcement strength Level,393,533,66,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,4,Stakeholder Collab Level,695,378,64,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,5,EPR Implementation,556,521,54,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,6,Incentive Growth,460,352,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,7,1,6,1,0,0,0,0,192,0,-1--1--1,,1|(326,357)|
+1,8,4,6,1,0,0,0,0,192,0,-1--1--1,,1|(585,347)|
+1,9,2,6,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,10,3,6,1,0,0,0,0,192,0,-1--1--1,,1|(441,417)|
+1,11,5,6,1,0,0,0,0,192,0,-1--1--1,,1|(477,423)|
+10,12,Incentive Decay,1002,327,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,13,Incentive Decay Rate,1006,452,55,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,14,2,12,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,15,13,12,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,16,Material Recovery Rate,65,478,66,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,17,Secondary Material Price,53,295,64,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,18,17,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,19,16,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Material Recovery
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,2
+10,1,Material Recovery Rate,401,912,60,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Collection Outflow,204,988,55,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,3,Material recovery efficiency,403,1070,42,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,4,Technological upgrading capability,610,990,63,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,5,2,1,1,0,0,0,0,192,0,-1--1--1,,1|(262,916)|
+1,6,4,1,1,0,0,0,0,192,0,-1--1--1,,1|(560,930)|
+1,7,3,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 7
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,2
+10,1,"E-Waste Stock",457,-121,46,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Carbon Emission Cumulative,806,196,46,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,Carbon Avoided Cumulative,378,232,46,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,4,48,236,-125,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,5,7,4,100,0,0,22,0,192,0,-1--1--1,,1|(284,-125)|
+1,6,7,1,4,0,0,22,0,192,0,-1--1--1,,1|(372,-125)|
+11,7,0,328,-125,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,8,"E-waste Inflow",328,-91,46,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,9,48,766,-119,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,10,12,1,100,0,0,22,0,192,0,-1--1--1,,1|(562,-119)|
+1,11,12,9,4,0,0,22,0,192,0,-1--1--1,,1|(695,-119)|
+11,12,0,628,-119,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,13,Collection Outflow,628,-85,49,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,14,48,591,190,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,15,17,14,100,0,0,22,0,192,0,-1--1--1,,1|(637,190)|
+1,16,17,2,4,0,0,22,0,192,0,-1--1--1,,1|(723,190)|
+11,17,0,680,190,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,18,Carbon Emission Rate,680,224,57,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,19,48,131,228,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,20,22,19,100,0,0,22,0,192,0,-1--1--1,,1|(185,228)|
+1,21,22,3,4,0,0,22,0,192,0,-1--1--1,,1|(287,228)|
+11,22,0,236,228,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,23,Carbon Avoidance Rate,236,262,61,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,24,"Base E-waste",192,-176,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,25,"E-waste growth rate",360,-210,53,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,26,Base informal collection fraction,694,-237,62,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,27,Collection and reverse logistics efficiency,785,20,55,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,28,Technological upgrading capability,675,66,63,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,29,Informal–formal sector integration,830,-184,57,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,30,Regulatory Enforcement strength Level,536,5,66,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,31,Base formal collection fraction,553,-201,58,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,32,24,8,1,0,0,0,0,192,0,-1--1--1,,1|(262,-175)|
+1,33,25,8,1,0,0,0,0,192,0,-1--1--1,,1|(335,-152)|
+1,34,31,13,1,0,0,0,0,192,0,-1--1--1,,1|(590,-160)|
+1,35,26,13,1,0,0,0,0,192,0,-1--1--1,,1|(668,-170)|
+1,36,29,13,1,0,0,0,0,192,0,-1--1--1,,1|(730,-154)|
+1,37,30,13,1,0,0,0,0,192,0,-1--1--1,,1|(615,-50)|
+1,38,28,13,1,0,0,0,0,192,0,-1--1--1,,1|(675,-24)|
+1,39,27,13,1,0,0,0,0,192,0,-1--1--1,,1|(726,-38)|
+1,40,1,13,1,0,0,0,0,192,0,-1--1--1,,1|(516,-74)|
+10,41,Time,380,-5,23,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,42,41,8,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,43,13,18,1,0,0,0,0,192,0,-1--1--1,,1|(625,106)|
+10,44,Emission factor informal base,609,318,63,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,45,44,18,1,0,0,0,0,192,0,-1--1--1,,1|(679,271)|
+1,46,28,18,1,0,0,0,0,192,0,-1--1--1,,1|(713,192)|
+10,47,Material Recovery Rate,347,397,66,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,48,Carbon saving pertonne,165,388,63,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,49,Lifecycle extension through reuse and repair,206,2,53,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,50,49,8,1,0,0,0,0,192,0,-1--1--1,,1|(216,-73)|
+1,51,8,23,1,0,0,0,0,192,0,-1--1--1,,1|(257,122)|
+1,52,49,23,1,0,0,0,0,192,0,-1--1--1,,1|(169,130)|
+10,53,Lifecycle carbon saving,68,309,60,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,54,53,23,1,0,0,0,0,192,0,-1--1--1,,1|(183,310)|
+1,55,48,23,1,0,0,0,0,192,0,-1--1--1,,1|(233,331)|
+1,56,47,23,1,0,0,0,0,192,0,-1--1--1,,1|(297,340)|
+10,57,Net Carbon Balance,658,493,53,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,58,3,57,1,0,0,0,0,192,0,-1--1--1,,1|(552,449)|
+1,59,2,57,1,0,0,0,0,192,0,-1--1--1,,1|(789,365)|
+10,60,Recovery Quality Factor,451,122,61,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,61,27,60,1,0,0,0,0,192,0,-1--1--1,,1|(611,34)|
+1,62,28,60,1,0,0,0,0,192,0,-1--1--1,,1|(537,77)|
+1,63,60,23,1,0,0,0,0,192,0,-1--1--1,,1|(309,169)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Dependent
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,2
+10,1,Lifecycle extension through reuse and repair,106,130,65,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Economic incentives and financial support,285,301,54,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,3,Social inclusion of informal workers LEvel,496,146,60,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,Stakeholder Collab Level,511,298,53,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,5,Informal–formal sector integration,727,273,57,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,6,2,3,1,0,0,0,0,192,0,-1--1--1,,1|(344,175)|
+1,7,4,3,1,0,0,0,0,192,0,-1--1--1,,1|(493,211)|
+1,8,5,3,1,0,0,0,0,192,0,-1--1--1,,1|(646,171)|
+1,9,2,1,1,0,0,0,0,192,0,-1--1--1,,1|(196,266)|
+1,10,3,1,1,0,0,0,0,192,0,-1--1--1,,1|(375,69)|
+10,11,Occupational health and safety conditions Level,298,515,64,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,Regulatory Enforcement strength Level,420,602,66,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,13,Technological upgrading capability,175,602,63,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,14,13,11,1,0,0,0,0,192,0,-1--1--1,,1|(216,530)|
+1,15,12,11,1,0,0,0,0,192,0,-1--1--1,,1|(375,528)|
+10,16,Data transparency and traceability Level,692,480,66,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,17,4,16,1,0,0,0,0,192,0,-1--1--1,,1|(548,387)|
+10,18,Collection and reverse logistics efficiency,664,590,55,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,19,18,16,1,0,0,0,0,192,0,-1--1--1,,1|(712,527)|
+10,20,Pollution control and environmental practices Level,567,721,63,27,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,21,12,20,1,0,0,0,0,192,0,-1--1--1,,1|(434,706)|
+1,22,13,20,1,0,0,0,0,192,0,-1--1--1,,1|(370,773)|
+///---\\\
+:L<%^E!@
+1:Integrated Strategy.vdfx
+4:Time
+5:Collection Outflow
+9:Integrated Strategy
+19:100,5
+24:0
+25:75
+26:75
+23:0
+15:0,0,0,0,0,0
+27:0,
+34:0,
+42:0
+72:0
+73:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Vensim Sans|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1
