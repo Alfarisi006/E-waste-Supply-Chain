@@ -1,0 +1,933 @@
+{UTF-8}
+Desired integration=MIN(1, 0.2 + 0.3 * Stakeholder collaboration+ 0.25 * Regulatory enforcement\
+		+ 0.2 * Economic incentives + 0.15 * Occupational health and safety)
+	~	Dmnl
+	~		|
+
+Scenario regulatory enforcement=0.3
+	~	Dmnl
+	~		|
+
+Lifecycle extension=MIN(1, Base lifecycle extension+ 0.3 * Policy effectiveness+ 0.25\
+		 * Data transparency and traceability+ 0.2 * Social inclusion of informal workers
+	)
+	~	Dmnl
+	~		|
+
+Formal recovery efficiency=MIN(0.9, Base formal recovery efficiency+ 0.2 * Technology adoption index\
+		 + 0.1 * Data transparency and traceability)
+	~	Dmnl
+	~		|
+
+Scenario economic incentives=0.25
+	~	Dmnl
+	~		|
+
+Capacity addition=Investment attractiveness*MAX(Max capacity addition, Capacity programme switch\
+		 * STEP(1, Policy start year) * Formal capacity gap / Capacity adjustment time)
+	~	Ton/Year/Year
+	~	Without the capacity programme (switch = 0) capacity addition is bounded by Max capacity addition; with the programme (switch = 1, from 2025) investment also responds to the formal capacity gap.
+	|
+
+Formal capacity gap=MAX(0, "Collected E-waste stock" * Formal processing share / Processing time - Formal recycling capacity)
+	~	Ton/Year
+	~		|
+
+Capacity programme switch=0
+	~	Dmnl
+	~	0 = no programme; 1 = demand-responsive capacity programme (scenario ICT + Capacity Programme).
+	|
+
+Capacity adjustment time=10
+	~	Year
+	~	Time to plan, finance, permit and build formal capacity (sensitivity range 5-20).
+	|
+
+Policy start year=2025
+	~	Year
+	~		|
+
+Implementation period=5
+	~	Year
+	~	Years over which the scenario inputs are phased in (2025-2030).
+	|
+
+Scenario EPR Implementation=0.25
+	~	Dmnl
+	~		|
+
+Investment attractiveness=MIN(1, 0.2 + 0.25 * Economic incentives+ 0.25 * Policy effectiveness\
+		+ 0.2 * Stakeholder collaboration + 0.1 * Data transparency and traceability)
+	~	Dmnl
+	~		|
+
+Scenario stakeholder collaboration=0.3
+	~	Dmnl
+	~		|
+
+Scenario access to clean technology=0.25
+	~	Dmnl
+	~		|
+
+Technology adoption index=MIN(1, 0.4 * Access to clean technology + 0.35 * Technological upgrading capability\
+		+ 0.25 * Economic incentives)
+	~	Dmnl
+	~		|
+
+Pollution control practices=MIN(0.9,0.15 + 0.3 * Access to clean technology+ 0.25 * Regulatory enforcement\
+		+ 0.2 * Technology adoption index
+	)
+	~	Dmnl
+	~		|
+
+Access to clean technology=Historical access to clean technology + (Scenario access to clean technology - Historical access to clean technology) * RAMP(1 / Implementation period, Policy start year\
+		, Policy start year + Implementation period)
+	~	Dmnl
+	~	Historical value until 2024; phased in linearly to the scenario value over the implementation period.
+	|
+
+Historical access to clean technology=0.25
+	~	Dmnl
+	~	Policy setting 2016-2024 (equal to BAU).
+	|
+
+Integration adjustment time=4
+	~	Year
+	~		|
+
+Integration erosion=Social inclusion of informal workers* (1 - Stakeholder collaboration\
+		) / Integration erosion time
+	~	1/Year
+	~		|
+
+Integration erosion time=10
+	~	Year
+	~		|
+
+Integration improvement=MAX ( 0 , (Desired integration-Social inclusion of informal workers\
+		)/Integration adjustment time )
+	~	1/Year
+	~		|
+
+Leakage fraction=MAX(Minimum leakage fraction,Base leakage fraction* (1 - 0.5 * Regulatory enforcement)* \
+		(1 - 0.3 * Collection and reverse logistics efficiency))
+	~	1/Year
+	~		|
+
+Formal processing share=MIN(0.95, Base formal share+ 0.25 * Regulatory enforcement+ 0.2\
+		 * EPR Implementation+ 0.25 * Social inclusion of informal workers
+	+ 0.15 * Access to clean technology)
+	~	Dmnl
+	~		|
+
+Technological upgrading capability=MIN(1, 0.25 + 0.3 * Economic incentives+ 0.3 * Access to clean technology\
+		+ 0.15 * Data transparency and traceability)
+	~	Dmnl
+	~		|
+
+Collection and reverse logistics efficiency=MIN(0.95, Base collection efficiency+ 0.25\
+		 * Reverse logistics efficiency + 0.2 * Social inclusion of informal workers
+	+ 0.15 * Data transparency and traceability)
+	~	Dmnl
+	~		|
+
+Occupational health and safety=MIN(1, 0.2 + 0.3 * Regulatory enforcement+ 0.25 * Social inclusion of informal workers\
+		+ 0.25 * Access to clean technology)
+	~	Dmnl
+	~		|
+
+Informal recovery efficiency=MAX(0.2, Base informal recovery efficiency+ 0.1 * Social inclusion of informal workers\
+		- 0.1 * Regulatory restriction effect
+	)
+	~	Dmnl
+	~		|
+
+Policy effectiveness=MIN(1, 0.35 * Regulatory enforcement+ 0.3 * EPR Implementation+ \
+		0.35 * Stakeholder collaboration)
+	~	Dmnl
+	~		|
+
+EPR Implementation=Historical EPR implementation + (Scenario EPR Implementation - Historical EPR implementation) * RAMP(1 / Implementation period, Policy start year\
+		, Policy start year + Implementation period)
+	~	Dmnl
+	~	Historical value until 2024; phased in linearly to the scenario value over the implementation period.
+	|
+
+Historical EPR implementation=0.25
+	~	Dmnl
+	~	Policy setting 2016-2024 (equal to BAU).
+	|
+
+Data transparency and traceability=MIN(1, 0.2 + 0.3 * Stakeholder collaboration+ 0.25\
+		 * EPR Implementation+ 0.2 * Regulatory enforcement)
+	~	Dmnl
+	~		|
+
+Reverse logistics efficiency=MIN(1, 0.25 + 0.3 * Stakeholder collaboration + 0.2 * Economic incentives\
+		+ 0.15 * Data transparency and traceability
+	)
+	~	Dmnl
+	~		|
+
+Economic incentives=Historical economic incentives + (Scenario economic incentives - Historical economic incentives) * RAMP(1 / Implementation period, Policy start year\
+		, Policy start year + Implementation period)
+	~	Dmnl
+	~	Historical value until 2024; phased in linearly to the scenario value over the implementation period.
+	|
+
+Historical economic incentives=0.25
+	~	Dmnl
+	~	Policy setting 2016-2024 (equal to BAU).
+	|
+
+Regulatory restriction effect=Regulatory enforcement * (1 - Social inclusion of informal workers\
+		)
+	~	Dmnl
+	~		|
+
+Regulatory enforcement=Historical regulatory enforcement + (Scenario regulatory enforcement - Historical regulatory enforcement) * RAMP(1 / Implementation period, Policy start year\
+		, Policy start year + Implementation period)
+	~	Dmnl
+	~	Historical value until 2024; phased in linearly to the scenario value over the implementation period.
+	|
+
+Historical regulatory enforcement=0.3
+	~	Dmnl
+	~	Policy setting 2016-2024 (equal to BAU).
+	|
+
+Stakeholder collaboration=Historical stakeholder collaboration + (Scenario stakeholder collaboration - Historical stakeholder collaboration) * RAMP(1 / Implementation period, Policy start year\
+		, Policy start year + Implementation period)
+	~	Dmnl
+	~	Historical value until 2024; phased in linearly to the scenario value over the implementation period.
+	|
+
+Historical stakeholder collaboration=0.3
+	~	Dmnl
+	~	Policy setting 2016-2024 (equal to BAU).
+	|
+
+Annual CO2 reduction=Virgin material displacement * Emission factor avoided virgin material\
+		 - Formal processing flow * Emission factor formal recycling - Informal processing flow\
+		 * Emission factor informal recycling
+	~	Kg CO2 Eq/Year
+	~		|
+
+Minimum leakage fraction=0.02
+	~	1/Year
+	~	Lower bound of the leakage fraction (previously a numeric literal; value unchanged).
+	|
+
+Base collection efficiency=0.35
+	~	Dmnl
+	~		|
+
+Saturation level=3.90284e+06
+	~	Ton/Year
+	~	Logistic saturation level of potential e-waste generation in Indonesia, fitted to GEM data 2016, 2019, 2022 and the 2040 projection of Mairizal et al. (2021).
+	|
+
+Inflection year=2020.51
+	~	Year
+	~	Fitted.
+	|
+
+Base formal recovery efficiency=0.6
+	~	Dmnl
+	~		|
+
+Base formal share=0.25
+	~	Dmnl
+	~		|
+
+Base informal recovery efficiency=0.4
+	~	Dmnl
+	~		|
+
+Base leakage fraction=0.08
+	~	1/Year
+	~		|
+
+Base lifecycle extension=0.15
+	~	Dmnl
+	~		|
+
+Capacity depreciation=Formal recycling capacity/Capacity lifetime
+	~	Ton/Year/Year
+	~		|
+
+Capacity lifetime=15
+	~	Year
+	~		|
+
+"Collected E-waste stock"= INTEG (Collection flow-Formal processing flow-Informal processing flow\
+		,
+		"Initial collected E-waste")
+	~	Ton
+	~		|
+
+Collection flow="E-waste stock" * Collection and reverse logistics efficiency / Collection Time
+	~	Ton/Year
+	~		|
+
+Collection Time=1
+	~	Year
+	~		|
+
+Logistic growth rate=0.1211
+	~	1/Year
+	~	Fitted.
+	|
+
+Cumulative CO2 Reduction= INTEG (Annual CO2 reduction * STEP(1, Policy start year),
+		0)
+	~	Kg CO2 Eq
+	~		|
+
+Disposal pollution factor=0.012
+	~	Pollution index/Ton
+	~		|
+
+"E-waste generation"=Saturation level / (1 + EXP( - Logistic growth rate * (Time - Inflection year)))\
+		 * (1 - Life cycle extension effect)
+	~	Ton/Year
+	~		|
+
+"E-waste stock"= INTEG ("E-waste generation"-Collection flow-Leakage to uncontrolled disposal\
+		,
+		"Initial E-waste stock")
+	~	Ton
+	~		|
+
+Emission factor avoided virgin material=2500
+	~	Kg CO2 Eq/Ton
+	~		|
+
+Emission factor formal recycling=500
+	~	Kg CO2 Eq/Ton
+	~		|
+
+Emission factor informal recycling=900
+	~	Kg CO2 Eq/Ton
+	~		|
+
+Formal pollution factor=0.002
+	~	Pollution index/Ton
+	~		|
+
+Formal processing flow=MIN("Collected E-waste stock" * Formal processing share/ Processing time\
+		,Formal recycling capacity
+	)
+	~	Ton/Year
+	~		|
+
+Formal recycling capacity= INTEG (Capacity addition-Capacity depreciation,
+		Initial formal recycling capacity)
+	~	Ton/Year
+	~		|
+
+Informal pollution factor=0.01
+	~	Pollution index/Ton
+	~		|
+
+Informal processing flow=MAX(0,"Collected E-waste stock" / Processing time - Formal processing flow\
+		)
+	~	Ton/Year
+	~		|
+
+Social inclusion of informal workers= INTEG (Integration improvement-Integration erosion\
+		,
+		Initial Social inclusion of informal workers)
+	~	Dmnl
+	~		|
+
+"Initial collected E-waste"=1.17418e+06
+	~	Ton
+	~		|
+
+"Initial E-waste stock"=1.95645e+06
+	~	Ton
+	~		|
+
+Initial formal recycling capacity=84433.5
+	~	Ton/Year
+	~		|
+
+Initial Social inclusion of informal workers=0.3770
+	~	Dmnl
+	~		|
+
+Initial pollution burden=169333
+	~	Pollution index
+	~		|
+
+Initial recovered material stock=516160
+	~	Ton
+	~		|
+
+Leakage to uncontrolled disposal=MAX ( 0 , "E-waste stock"*Leakage fraction )
+	~	Ton/Year
+	~		|
+
+Life cycle extension effect=0.25 * Lifecycle extension
+	~	Dmnl
+	~		|
+
+Max capacity addition=13000
+	~	Ton/Year/Year
+	~		|
+
+Pollution burden= INTEG (Pollution generation-Pollution mitigation,
+		Initial pollution burden)
+	~	Pollution index
+	~		|
+
+Pollution generation=Informal processing flow * Informal pollution factor+ Leakage to uncontrolled disposal\
+		 * Disposal pollution factor + Formal processing flow * Formal pollution factor
+	~	Pollution index/Year
+	~		|
+
+Pollution mitigation=Pollution burden*Pollution control practices/Pollution mitigation time
+	~	Pollution index/Year
+	~		|
+
+Pollution mitigation time=5
+	~	Year
+	~		|
+
+Processing time=1
+	~	Year
+	~		|
+
+Recovered material flow=Formal processing flow* Formal recovery efficiency + Informal processing flow\
+		 * Informal recovery efficiency
+	~	Ton/Year
+	~		|
+
+Recovered Material Stock= INTEG (Recovered material flow-Secondary material use,
+		Initial recovered material stock)
+	~	Ton
+	~		|
+
+Secondary material use=Recovered Material Stock/Secondary material use time
+	~	Ton/Year
+	~		|
+
+Secondary material use time=1
+	~	Year
+	~		|
+
+Substitution ratio=0.85
+	~	Dmnl
+	~		|
+
+Virgin material displacement=Secondary material use*Substitution ratio
+	~	Ton/Year
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 2060
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 2016
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 1
+	~	Year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.25
+	~	Year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*E-waste module
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,98,2
+10,1,"E-waste stock",407,468,46,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,2,48,141,466,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,2,100,0,0,22,0,192,0,-1--1--1,,1|(201,466)|
+1,4,5,1,4,0,0,22,0,192,0,-1--1--1,,1|(311,466)|
+11,5,0,256,466,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,"E-waste generation",256,500,51,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,7,48,602,567,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,8,10,1,100,0,0,22,0,192,0,-1--1--1,,1|(406,509)|
+1,9,10,7,4,0,0,22,0,192,0,-1--1--1,,3|(406,567)|(407,567)|(499,567)|
+11,10,0,406,532,6,8,34,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,11,Leakage to uncontrolled disposal,475,532,63,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,"Initial E-waste stock",558,467,55,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,13,12,1,1,0,0,0,0,192,1,-1--1--1,,1|(477,445)|
+10,14,Saturation level,54,477,64,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,15,14,6,1,0,0,0,0,192,0,-1--1--1,,1|(193,531)|
+10,16,Logistic growth rate,120,385,66,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,17,Time,97,577,24,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,18,Inflection year,272,609,41,13,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,19,Life cycle extension effect,318,334,66,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,20,16,6,1,0,0,0,0,192,0,-1--1--1,,1|(233,407)|
+1,21,17,6,1,0,0,0,0,192,0,-1--1--1,,1|(201,577)|
+1,22,18,6,1,0,0,0,0,192,0,-1--1--1,,1|(255,558)|
+1,23,19,6,1,0,0,0,0,192,0,-1--1--1,,1|(313,426)|
+10,24,Lifecycle extension,181,253,50,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,25,24,19,1,0,0,0,0,192,0,-1--1--1,,1|(286,286)|
+10,26,Base lifecycle extension,-61,210,61,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,27,26,24,1,0,0,0,0,192,0,-1--1--1,,1|(74,204)|
+10,28,Collection Time,438,292,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,29,Collection and reverse logistics efficiency,590,286,58,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,30,Base collection efficiency,588,154,64,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,31,Reverse logistics efficiency,751,149,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,32,30,29,1,0,0,0,0,192,0,-1--1--1,,1|(581,199)|
+1,33,31,29,1,0,0,0,0,192,0,-1--1--1,,1|(636,199)|
+1,34,1,11,1,0,0,0,0,192,0,-1--1--1,,1|(389,535)|
+10,35,Leakage fraction,511,612,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,36,35,11,1,0,0,0,0,192,0,-1--1--1,,1|(441,588)|
+10,37,Base leakage fraction,406,694,56,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,38,29,35,1,0,0,0,0,192,0,-1--1--1,,1|(709,443)|
+1,39,37,35,1,0,0,0,0,192,0,-1--1--1,,1|(482,665)|
+10,40,"Collected E-waste stock",783,371,61,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,41,43,1,100,0,0,22,0,192,0,-1--1--1,,1|(407,429)|
+1,42,43,40,4,0,0,22,0,192,0,-1--1--1,,3|(407,371)|(407,371)|(564,371)|
+11,43,0,407,409,6,8,34,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,44,Collection flow,459,409,46,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,45,1,44,1,0,0,0,0,192,0,-1--1--1,,1|(363,425)|
+1,46,28,44,1,0,0,0,0,192,0,-1--1--1,,1|(468,349)|
+1,47,29,44,1,0,0,0,0,192,0,-1--1--1,,1|(514,342)|
+12,48,48,1123,371,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,49,51,40,100,0,0,22,0,192,0,-1--1--1,,1|(908,371)|
+1,50,51,48,4,0,0,22,0,192,0,-1--1--1,,1|(1048,371)|
+11,51,0,978,371,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,52,Formal processing flow,978,405,60,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,53,48,1128,583,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,54,56,40,100,0,0,22,0,192,0,-1--1--1,,1|(783,433)|
+1,55,56,53,4,0,0,22,0,192,0,-1--1--1,,3|(783,583)|(783,583)|(950,583)|
+11,56,0,783,477,6,8,34,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,57,Informal processing flow,853,477,64,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,58,"Initial collected E-waste",865,303,61,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,59,58,40,1,0,0,0,0,192,1,-1--1--1,,1|(794,318)|
+10,60,Formal processing share,1192,301,64,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,61,Base formal share,1041,231,49,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,62,61,60,1,0,0,0,0,192,0,-1--1--1,,1|(1139,261)|
+1,63,40,52,1,0,0,0,0,192,0,-1--1--1,,1|(928,346)|
+1,64,60,52,1,0,0,0,0,192,0,-1--1--1,,1|(1035,326)|
+10,65,Processing time,1008,496,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,66,65,52,1,0,0,0,0,192,0,-1--1--1,,1|(970,441)|
+1,67,52,57,1,0,0,0,0,192,0,-1--1--1,,1|(866,424)|
+1,68,40,57,1,0,0,0,0,192,0,-1--1--1,,1|(739,433)|
+1,69,65,57,1,0,0,0,0,192,0,-1--1--1,,1|(915,521)|
+10,70,Formal recycling capacity,1619,452,66,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,71,70,52,1,0,0,0,0,192,0,-1--1--1,,1|(1195,383)|
+12,72,48,1323,454,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,73,75,72,100,0,0,22,0,192,0,-1--1--1,,1|(1385,454)|
+1,74,75,70,4,0,0,22,0,192,0,-1--1--1,,1|(1501,454)|
+11,75,0,1443,454,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,76,Capacity addition,1443,488,47,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,77,48,1883,452,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,78,80,70,100,0,0,22,0,192,0,-1--1--1,,1|(1729,452)|
+1,79,80,77,4,0,0,22,0,192,0,-1--1--1,,1|(1829,452)|
+11,80,0,1779,452,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,81,Capacity depreciation,1779,486,57,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,82,Initial formal recycling capacity,1608,337,58,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,83,82,70,1,0,0,0,0,192,1,-1--1--1,,1|(1588,382)|
+10,84,Investment attractiveness,1339,591,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,85,Max capacity addition,1557,579,57,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,86,84,76,1,0,0,0,0,192,0,-1--1--1,,1|(1420,542)|
+1,87,85,76,1,0,0,0,0,192,0,-1--1--1,,1|(1473,558)|
+1,88,70,81,1,0,0,0,0,192,0,-1--1--1,,1|(1726,539)|
+10,89,Capacity lifetime,1754,365,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,90,89,81,1,0,0,0,0,192,0,-1--1--1,,1|(1717,415)|
+10,91,Social inclusion of informal workers,309,97,47,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,92,91,24,1,0,0,0,0,192,0,-1--1--1,,1|(264,116)|
+1,93,91,29,1,0,0,0,0,192,0,-1--1--1,,1|(494,177)|
+10,94,Social inclusion of informal workers,1347,132,47,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,95,94,60,1,0,0,0,0,192,0,-1--1--1,,1|(1272,184)|
+10,96,Regulatory enforcement,581,755,42,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,97,96,35,1,0,0,0,0,192,0,-1--1--1,,1|(542,711)|
+10,98,EPR Implementation,1395,220,62,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,99,98,60,1,0,0,0,0,192,0,-1--1--1,,1|(1270,233)|
+10,100,Regulatory enforcement,1220,120,42,17,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,101,100,60,1,0,0,0,0,64,0,-1--1--1,,1|(1169,235)|
+10,102,Stakeholder collaboration,792,15,42,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,103,102,31,1,0,0,0,0,192,0,-1--1--1,,1|(739,74)|
+10,104,Access to clean technology,1393,342,45,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,105,104,60,1,0,0,0,0,192,0,-1--1--1,,1|(1308,300)|
+10,106,Economic incentives,903,216,62,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,107,106,31,1,0,0,0,0,192,0,-1--1--1,,1|(847,148)|
+10,108,Data transparency and traceability,305,180,58,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,109,108,24,1,0,0,0,0,192,0,-1--1--1,,1|(251,216)|
+1,110,108,31,1,0,0,0,0,192,0,-1--1--1,,1|(501,47)|
+1,111,108,29,1,0,0,0,0,192,0,-1--1--1,,1|(450,199)|
+10,112,Policy effectiveness,153,106,60,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,113,112,24,1,0,0,0,0,192,0,-1--1--1,,1|(142,173)|
+10,114,Economic incentives,1160,673,59,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,115,Policy effectiveness,1265,715,57,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,116,Stakeholder collaboration,1397,715,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,117,Data transparency and traceability,1491,673,55,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,118,114,84,1,0,0,0,0,192,0,-1--1--1,,1|(1227,621)|
+1,119,115,84,1,0,0,0,0,192,0,-1--1--1,,1|(1307,652)|
+1,120,116,84,1,0,0,0,0,192,0,-1--1--1,,1|(1355,661)|
+1,121,117,84,1,0,0,0,0,192,0,-1--1--1,,1|(1419,611)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Material Recovery Module
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,2
+10,1,Recovered Material Stock,576,334,65,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,2,48,246,336,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,2,100,0,0,22,0,192,0,-1--1--1,,1|(316,336)|
+1,4,5,1,4,0,0,22,0,192,0,-1--1--1,,1|(450,336)|
+11,5,0,383,336,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,Recovered material flow,383,370,63,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,7,48,862,334,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,8,10,1,100,0,0,22,0,192,0,-1--1--1,,1|(690,334)|
+1,9,10,7,4,0,0,22,0,192,0,-1--1--1,,1|(802,334)|
+11,10,0,746,334,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,11,Secondary material use,746,368,61,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,Initial recovered material stock,553,222,65,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,13,12,1,1,0,0,0,0,192,1,-1--1--1,,1|(552,284)|
+10,14,Formal processing flow,172,414,66,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,15,Informal processing flow,375,497,56,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,16,Formal recovery efficiency,248,480,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,17,Informal recovery efficiency,540,457,48,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,18,14,6,1,0,0,0,0,192,0,-1--1--1,,1|(314,415)|
+1,19,16,6,1,0,0,0,0,192,0,-1--1--1,,1|(324,441)|
+1,20,15,6,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,21,17,6,1,0,0,0,0,192,0,-1--1--1,,1|(459,455)|
+10,22,Base formal recovery efficiency,108,534,56,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,23,22,16,1,0,0,0,0,192,0,-1--1--1,,1|(204,524)|
+10,24,Base informal recovery efficiency,587,600,60,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,25,24,17,1,0,0,0,0,192,0,-1--1--1,,1|(568,530)|
+10,26,Secondary material use time,865,472,61,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,27,26,11,1,0,0,0,0,192,0,-1--1--1,,1|(765,395)|
+1,28,1,11,1,0,0,0,0,192,0,-1--1--1,,1|(675,296)|
+10,29,Virgin material displacement,876,219,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,30,11,29,1,0,0,0,0,192,0,-1--1--1,,1|(766,287)|
+10,31,Substitution ratio,1025,282,47,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,32,31,29,1,0,0,0,0,192,0,-1--1--1,,1|(973,221)|
+10,33,Social inclusion of informal workers,455,597,47,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,34,33,17,1,0,0,0,0,192,0,-1--1--1,,1|(474,509)|
+10,35,Data transparency and traceability,168,642,58,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,36,35,16,1,0,0,0,0,192,0,-1--1--1,,1|(235,596)|
+10,37,Regulatory restriction effect,722,589,60,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,38,37,17,1,0,0,0,0,192,0,-1--1--1,,1|(679,470)|
+10,39,Technology adoption index,313,664,58,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,40,39,16,1,0,0,0,0,192,0,-1--1--1,,1|(314,528)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Decarbonization module
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,2
+10,1,Cumulative CO2 Reduction,-143,306,46,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,2,48,-485,305,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,2,100,0,0,22,0,192,0,-1--1--1,,1|(-407,305)|
+1,4,5,1,4,0,0,22,0,192,0,-1--1--1,,1|(-258,305)|
+11,5,0,-332,305,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,Annual CO2 reduction,-332,339,58,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Virgin material displacement,-441,191,43,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,8,Emission factor avoided virgin material,-527,394,62,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,9,Formal processing flow,-459,471,66,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,10,Informal processing flow,-142,412,56,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,11,Emission factor formal recycling,-200,473,59,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,Emission factor informal recycling,-358,539,63,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,13,7,6,1,0,0,0,0,192,0,-1--1--1,,1|(-352,253)|
+1,14,8,6,1,0,0,0,0,192,0,-1--1--1,,1|(-424,385)|
+1,15,9,6,1,0,0,0,0,192,0,-1--1--1,,1|(-365,423)|
+1,16,12,6,1,0,0,0,0,192,0,-1--1--1,,1|(-335,464)|
+1,17,11,6,1,0,0,0,0,192,0,-1--1--1,,1|(-295,397)|
+1,18,10,6,1,0,0,0,0,192,0,-1--1--1,,1|(-261,385)|
+10,19,Pollution burden,551,265,46,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,20,48,247,266,14,8,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,21,23,20,100,0,0,22,0,192,0,-1--1--1,,1|(312,266)|
+1,22,23,19,4,0,0,22,0,192,0,-1--1--1,,1|(440,266)|
+11,23,0,369,266,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,24,Pollution generation,369,300,58,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,25,48,825,265,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,26,28,19,100,0,0,22,0,192,0,-1--1--1,,1|(648,265)|
+1,27,28,25,4,0,0,22,0,192,0,-1--1--1,,1|(763,265)|
+11,28,0,706,265,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,29,Pollution mitigation,706,299,52,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,30,Initial pollution burden,472,177,60,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,31,30,19,1,0,0,0,0,192,1,-1--1--1,,1|(545,222)|
+10,32,Informal processing flow,173,324,56,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,33,Informal pollution factor,210,397,63,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,34,Leakage to uncontrolled disposal,284,474,66,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,35,Disposal pollution factor,459,470,63,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,36,Formal processing flow,517,344,66,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,37,Formal pollution factor,488,401,60,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,38,32,24,1,0,0,0,0,192,0,-1--1--1,,1|(268,331)|
+1,39,33,24,1,0,0,0,0,192,0,-1--1--1,,1|(288,370)|
+1,40,34,24,1,0,0,0,0,192,0,-1--1--1,,1|(326,417)|
+1,41,35,24,1,0,0,0,0,192,0,-1--1--1,,1|(377,381)|
+1,42,37,24,1,0,0,0,0,192,0,-1--1--1,,1|(411,360)|
+1,43,36,24,1,0,0,0,0,192,0,-1--1--1,,1|(435,336)|
+10,44,Pollution control practices,754,395,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,45,Pollution mitigation time,744,171,64,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,46,19,29,1,0,0,0,0,192,0,-1--1--1,,1|(613,251)|
+1,47,45,29,1,0,0,0,0,192,0,-1--1--1,,1|(697,202)|
+1,48,44,29,1,0,0,0,0,192,0,-1--1--1,,1|(697,358)|
+10,49,Regulatory enforcement,833,501,42,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,50,49,44,1,0,0,0,0,192,0,-1--1--1,,1|(797,461)|
+10,51,Access to clean technology,890,423,45,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,52,51,44,1,0,0,0,0,192,0,-1--1--1,,1|(845,394)|
+10,53,Technology adoption index,683,491,48,17,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,54,53,44,1,0,0,0,0,64,0,-1--1--1,,1|(707,439)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Informal worker integration
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,2
+10,1,Social inclusion of informal workers,694,249,48,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,2,48,344,249,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,2,100,0,0,22,0,192,0,-1--1--1,,1|(424,249)|
+1,4,5,1,4,0,0,22,0,192,0,-1--1--1,,1|(576,249)|
+11,5,0,501,249,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,Integration improvement,501,283,65,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,7,48,1056,249,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,8,10,1,100,0,0,22,0,192,0,-1--1--1,,1|(814,249)|
+1,9,10,7,4,0,0,22,0,192,0,-1--1--1,,1|(972,249)|
+11,10,0,893,249,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,11,Integration erosion,893,283,51,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,Initial Social inclusion of informal workers,703,133,62,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,13,12,1,1,0,0,0,0,192,1,-1--1--1,,1|(720,184)|
+10,14,Desired integration,288,372,51,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,15,Social inclusion of informal workers,650,412,47,20,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,16,Integration adjustment time,522,403,60,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,17,14,6,1,0,0,0,0,192,0,-1--1--1,,1|(352,320)|
+1,18,16,6,1,0,0,0,0,192,0,-1--1--1,,1|(501,361)|
+1,19,1,6,1,0,0,0,0,192,0,-1--1--1,,1|(613,191)|
+1,20,1,11,1,0,0,0,0,192,0,-1--1--1,,1|(798,306)|
+10,21,Integration erosion time,944,160,63,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,22,21,11,1,0,0,0,0,192,0,-1--1--1,,1|(891,201)|
+10,23,Regulatory enforcement,126,371,42,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,24,23,14,1,0,0,0,0,192,0,-1--1--1,,1|(190,393)|
+10,25,Stakeholder collaboration,517,584,42,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,26,25,14,1,0,0,0,0,192,0,-1--1--1,,1|(375,518)|
+1,27,25,11,1,0,0,0,0,192,0,-1--1--1,,1|(857,422)|
+10,28,Economic incentives,222,265,62,13,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,29,28,14,1,0,0,0,0,192,0,-1--1--1,,1|(253,356)|
+10,30,Occupational health and safety,197,490,66,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,31,30,14,1,0,0,0,0,192,0,-1--1--1,,1|(258,432)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Enabler index equations
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,82,2
+10,1,Policy effectiveness,588,66,54,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Regulatory enforcement,242,220,65,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,Scenario regulatory enforcement,275,333,52,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,4,3,2,1,0,0,0,0,192,0,-1--1--1,,1|(165,296)|
+10,5,Regulatory enforcement,268,52,46,26,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,6,EPR Implementation,591,221,56,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Scenario EPR Implementation,573,326,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,8,7,6,1,0,0,0,0,192,0,-1--1--1,,1|(505,263)|
+10,9,Stakeholder collaboration,911,234,66,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,10,Scenario stakeholder collaboration,1019,346,56,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,11,10,9,1,0,0,0,0,192,0,-1--1--1,,1|(1017,310)|
+1,12,2,1,1,0,0,0,0,192,0,-1--1--1,,1|(374,107)|
+1,13,6,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,14,9,1,1,0,0,0,0,192,0,-1--1--1,,1|(790,113)|
+10,15,Access to clean technology,243,693,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,16,Scenario access to clean technology,250,840,63,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,17,16,15,1,0,0,0,0,192,0,-1--1--1,,1|(188,778)|
+10,18,Technological upgrading capability,589,608,65,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,19,15,18,1,0,0,0,0,192,0,-1--1--1,,1|(324,647)|
+10,20,Economic incentives,589,720,56,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,21,Scenario economic incentives,589,861,50,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,22,21,20,1,0,0,0,0,192,0,-1--1--1,,1|(537,795)|
+1,23,20,18,1,0,0,0,0,192,0,-1--1--1,,1|(570,683)|
+10,24,Data transparency and traceability,611,458,60,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,25,2,24,1,0,0,0,0,192,0,-1--1--1,,1|(450,310)|
+1,26,6,24,1,0,0,0,0,192,0,-1--1--1,,1|(675,307)|
+1,27,9,24,1,0,0,0,0,192,0,-1--1--1,,1|(782,366)|
+10,28,Occupational health and safety,952,564,64,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,29,Social inclusion of informal workers,1248,630,47,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,30,29,28,1,0,0,0,0,192,0,-1--1--1,,1|(1154,537)|
+1,31,2,28,1,0,0,0,0,192,0,-1--1--1,,1|(790,546)|
+1,32,15,28,1,0,0,0,0,192,0,-1--1--1,,1|(680,554)|
+10,33,Regulatory restriction effect,951,746,57,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,34,29,33,1,0,0,0,0,192,0,-1--1--1,,1|(1125,770)|
+10,35,Regulatory enforcement,820,843,39,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,36,35,33,1,0,0,0,0,192,0,-1--1--1,,1|(835,766)|
+1,37,24,18,1,0,0,0,0,192,0,-1--1--1,,1|(621,532)|
+10,38,Technology adoption index,182,547,55,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,39,15,38,1,0,0,0,0,192,0,-1--1--1,,1|(162,630)|
+1,40,18,38,1,0,0,0,0,192,0,-1--1--1,,1|(494,529)|
+1,41,20,38,1,0,0,0,0,192,0,-1--1--1,,1|(358,568)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Graph
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,82,2
+12,1,0,324,292,300,200,0,15,0,0,1,0,0,0,0,0,0,0,0,0
+Formal_processing
+12,2,0,336,721,300,200,0,15,0,0,1,0,0,0,0,0,0,0,0,0
+Informal_processing
+12,3,0,966,293,300,200,0,15,0,0,1,0,0,0,0,0,0,0,0,0
+Recovered_material
+12,4,0,960,723,300,200,0,15,0,0,1,0,0,0,0,0,0,0,0,0
+Informal_worker_integration
+12,5,0,1620,287,300,200,0,15,0,0,1,0,0,0,0,0,0,0,0,0
+Pollution_burden
+12,6,0,1624,713,300,200,0,15,0,0,1,0,0,0,0,0,0,0,0,0
+Cumulative_CO2_Reduction
+///---\\\
+:GRAPH Cumulative_CO2_Reduction
+:TITLE Cumulative CO2 Reduction
+:SCALE
+:VAR Cumulative CO2 Reduction
+:DATASET *
+:LINE-WIDTH 1
+
+:GRAPH Pollution_burden
+:TITLE Pollution burden
+:SCALE
+:VAR Pollution burden
+:DATASET *
+:LINE-WIDTH 1
+
+:GRAPH Formal_processing
+:TITLE Formal processing
+:SCALE
+:VAR Formal processing flow
+:DATASET *
+:LINE-WIDTH 1
+
+:GRAPH Informal_processing
+:TITLE Informal processing
+:SCALE
+:VAR Informal processing flow
+:DATASET *
+:LINE-WIDTH 1
+
+:GRAPH Recovered_material
+:TITLE Recovered material
+:SCALE
+:VAR Recovered material flow
+:DATASET *
+:LINE-WIDTH 1
+
+:GRAPH Informal_worker_integration
+:TITLE Informal worker integration
+:SCALE
+:VAR Social inclusion of informal workers
+:DATASET *
+:LINE-WIDTH 1
+
+:TABLE CO2
+:TITLE CO2
+:TIME-DOWN
+:VAR Annual CO2 reduction
+:DATASET 
+:VAR Cumulative CO2 Reduction
+:DATASET 
+:VAR "E-waste stock"
+:DATASET 
+
+:TABLE Regulatory_push
+:TITLE Regulatory push
+:TIME-DOWN
+:VAR "E-waste generation"
+:DATASET 
+:VAR "E-waste stock"
+:DATASET 
+:VAR "Collected E-waste stock"
+:DATASET 
+:VAR Collection flow
+:DATASET 
+:VAR Leakage to uncontrolled disposal
+:DATASET 
+:VAR Formal processing flow
+:DATASET 
+:VAR Informal processing flow
+:DATASET 
+:VAR Formal recycling capacity
+:DATASET 
+:VAR Recovered material flow
+:DATASET 
+:VAR Recovered Material Stock
+:DATASET 
+:VAR Secondary material use
+:DATASET 
+:VAR Virgin material displacement
+:DATASET 
+:VAR Social inclusion of informal workers
+:DATASET 
+:VAR Pollution burden
+:DATASET 
+:VAR Annual CO2 reduction
+:DATASET 
+:VAR Cumulative CO2 Reduction
+:DATASET 
+
+:TABLE Technology_push
+:TITLE Technology push
+:TIME-DOWN
+:VAR "E-waste generation"
+:DATASET 
+:VAR "E-waste stock"
+:DATASET 
+:VAR "Collected E-waste stock"
+:DATASET 
+:VAR Collection flow
+:DATASET 
+:VAR Leakage to uncontrolled disposal
+:DATASET 
+:VAR Formal processing flow
+:DATASET 
+:VAR Informal processing flow
+:DATASET 
+:VAR Formal recycling capacity
+:DATASET 
+:VAR Recovered material flow
+:DATASET 
+:VAR Recovered Material Stock
+:DATASET 
+:VAR Secondary material use
+:DATASET 
+:VAR Virgin material displacement
+:DATASET 
+:VAR Social inclusion of informal workers
+:DATASET 
+:VAR Pollution burden
+:DATASET 
+:VAR Annual CO2 reduction
+:DATASET 
+:VAR Cumulative CO2 Reduction
+:DATASET 
+:L<%^E!@
+1:Integrated circular transition.vdfx
+4:Time
+5:Lifecycle extension
+9:Technology push
+19:98,0
+24:0
+25:75
+26:75
+23:0
+15:0,0,0,0,0,0
+27:0,
+34:0,
+42:0
+72:0
+73:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Vensim Sans|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1
